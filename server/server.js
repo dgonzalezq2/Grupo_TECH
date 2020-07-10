@@ -16,7 +16,7 @@ app.use(require('./routes/impresora'))
 
 
 //Conectar con MongoDB
-mongoose.connect("mongodb://localhost:27017/prueba", {
+mongoose.connect(process.env.URLDB, {
             useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true
