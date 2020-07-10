@@ -27,8 +27,6 @@ let impresoraSchema = new Schema({
     },
     contador: {
         type: Number,
-        get: (v) => Math.round(v),
-        set: (v) => Math.round(v),
         default: 0,
     },
     precio: {
