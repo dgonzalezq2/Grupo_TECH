@@ -4,7 +4,18 @@ const app = express();
 const Impresora = require('../models/impresora')
 
 app.get('/impresora', (req, res) => {
-    res.json("get Impresora")
+    Impresora.find({}, "marca modelo serie color ip precio").exec((err, impresora) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err,
+            });
+        }
+        res.json({
+            ok: true,
+            impresora,
+        });
+    });
 })
 
 app.post('/impresora', (req, res) => { //Para crear recursos dentro del servidor
@@ -56,16 +67,21 @@ app.put('/impresora/:id', (req, res) => {
     );
 });
 
-app.delete("/impresora", function(req, res) {
-    r
-    es.json("delete Usuario");
-
-})
-
-app.delete('/impresora', (req, res) => {
-    res.json("delete Impresora")
-})
-
+app.delete("/impresora/:id", function(req, res) {
+    let id = req.params.id;
+    Impresora.findByIdAndRemove(id, (err, impresora) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err,
+            });
+        }
+        res.json({
+            ok: true,
+            impresora,
+        });
+    });
+});
 
 
 module.exports = app;
