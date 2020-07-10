@@ -16,10 +16,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 let urlDB;
 
-// if (process.env.NODE_ENV === 'dev') {
-//     urlDB = 'mongodb://localhost:27017/prueba';
-// } else {
-urlDB = 'mongodb+srv://prueba_user:ujvLEJ5daT7qERiw@prueba.onses.mongodb.net/prueba'
-    //}
+if (process.env.NODE_ENV === 'dev') {
+    urlDB = 'mongodb://localhost:27017/prueba';
+} else {
+    urlDB = 'mongodb+srv://prueba_user:ujvLEJ5daT7qERiw@prueba.onses.mongodb.net/prueba'
+}
 
 process.env.URLDB = urlDB;
