@@ -11,11 +11,49 @@ app.get('/impresora', (req, res) => {
                 err,
             });
         }
+
+        if (!impresora) {
+            return res.status(500).json({
+                ok: false,
+                error: {
+                    message: 'No se encontraron impresoras.',
+                },
+            });
+        }
+
         res.json({
             ok: true,
             impresora,
         });
     });
+})
+
+app.get('/impresora/:id', (req, res) => {
+    const id = req.params.id;
+    Impresora.findOne({ _id: id }, "marca modelo serie color ip precio", (err, impresora) => {
+        if (err)
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+
+        if (!impresora) {
+            return res.status(500).json({
+                ok: false,
+                error: {
+                    message: 'No se encontro impresora.',
+                },
+            });
+        }
+
+        // data.contador = undefined;
+
+        return res.json({
+            ok: true,
+            impresora,
+        });
+    });
+
 })
 
 app.post('/impresora', (req, res) => { //Para crear recursos dentro del servidor
